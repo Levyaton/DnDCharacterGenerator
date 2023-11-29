@@ -1,5 +1,11 @@
 package com.dnd.DnDCharacterGenerator.domain;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import lombok.Getter;
+import lombok.Setter;
+
+
 public enum Skill {
     ACROBATICS(StatName.DEXTERITY),
     ANIMAL_HANDLING(StatName.WISDOM),

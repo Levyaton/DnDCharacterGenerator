@@ -12,17 +12,17 @@ public class Changeling extends AbstractRace {
 
 
     @Override
-    protected Stat dexterity() {
+    public Stat dexterity() {
         return new Stat.Dexterity(selectedStat == ModifierInput.DEXTERITY ? 1 : 0);
     }
 
     @Override
-    protected Stat intelligence() {
+    public Stat intelligence() {
         return new Stat.Intelligence(selectedStat == ModifierInput.INTELLIGENCE ? 1 : 0);
     }
 
     @Override
-    protected Stat charisma() {
+    public Stat charisma() {
         return new Stat.Charisma(2);
     }
 

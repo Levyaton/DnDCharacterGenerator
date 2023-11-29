@@ -2,84 +2,99 @@ package com.dnd.DnDCharacterGenerator.domain.race;
 
 import com.dnd.DnDCharacterGenerator.domain.*;
 import com.dnd.DnDCharacterGenerator.domain.abillity.Ability;
+import com.dnd.DnDCharacterGenerator.domain.race.dragonborn.Dragonborn;
+import com.dnd.DnDCharacterGenerator.domain.race.elf.DarkElfDrow;
+import com.dnd.DnDCharacterGenerator.domain.race.elf.Elf;
+import com.dnd.DnDCharacterGenerator.domain.race.elf.HighElf;
+import com.dnd.DnDCharacterGenerator.domain.race.elf.WoodElf;
 import com.dnd.DnDCharacterGenerator.domain.spells.Spell;
 import com.dnd.DnDCharacterGenerator.domain.spells.Spellbook;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
+import java.util.Set;
 
 @Getter
 @Setter
 @Component
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Elf.class, name = "highElf"),
+        @JsonSubTypes.Type(value = Dragonborn.class, name = "dragonborn")
+})
 public abstract class AbstractRace {
     @Autowired
+    @JsonIgnore
     protected Spellbook spellbook;
 
-    protected int speed() {
+    public String otherTraits() {
+        return "";
+    }
+
+    public int speed() {
         return 30; // Default speed
     }
 
-    protected List<Spell> cantrips() {
-        return Collections.emptyList();
+    public Set<Spell> cantrips() {
+        return Collections.emptySet();
     }
 
-    protected List<Spell> spells() {
-        return Collections.emptyList();
+    public Set<Spell> spells() {
+        return Collections.emptySet();
     }
 
-    protected List<Ability> genericAbilities() {
-        return Collections.emptyList();
+    public Set<Ability> genericAbilities() {
+        return Collections.emptySet();
     }
 
-    protected List<Ability> damageAbilities() {
-        return Collections.emptyList();
+    public Set<Ability> damageAbilities() {
+        return Collections.emptySet();
     }
 
-    protected List<Ability> genericSkills() {
-        return Collections.emptyList();
+    public Set<Skill> proficiencies() {
+        return Collections.emptySet();
     }
 
-    protected List<Skill> proficiencies() {
-        return Collections.emptyList();
+    public Set<Language> languages(){
+        return Set.of(Language.COMMON);
     }
 
-    protected List<Language> languages(){
-        return List.of(Language.COMMON);
+    public Set<Armour> armourProficiencies() {
+        return Collections.emptySet();
     }
 
-    protected List<Armour> armourProficiencies() {
-        return Collections.emptyList();
+    public Set<Weapon> weaponProficiencies() {
+        return Collections.emptySet();
     }
 
-    protected List<Weapon> weaponProficiencies() {
-        return Collections.emptyList();
-    }
-
-    protected Stat strength() {
+    public Stat strength() {
         return new Stat.Strength(0);
     }
 
-    protected Stat dexterity() {
+    public Stat dexterity() {
         return new Stat.Dexterity(0);
     }
 
-    protected Stat constitution() {
+    public Stat constitution() {
         return new Stat.Constitution(0);
     }
 
-    protected Stat intelligence() {
+    public Stat intelligence() {
         return new Stat.Intelligence(0);
     }
 
-    protected Stat wisdom() {
+    public Stat wisdom() {
         return new Stat.Wisdom(0);
     }
 
-    protected Stat charisma() {
+    public Stat charisma() {
         return new Stat.Charisma(0);
     }
 

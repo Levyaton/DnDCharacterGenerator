@@ -7,29 +7,32 @@ import com.dnd.DnDCharacterGenerator.domain.abillity.Ability;
 import com.dnd.DnDCharacterGenerator.domain.abillity.generic.MaskOfTheWild;
 import com.dnd.DnDCharacterGenerator.domain.spells.Spell;
 import com.dnd.DnDCharacterGenerator.domain.spells.wizard.WizardSpellCantrip;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@JsonTypeName("woodElf")
 public class WoodElf extends Elf{
 
     @Override
-    protected Stat wisdom() {
+    public Stat wisdom() {
         return new Stat.Wisdom(1);
     }
 
     @Override
-    protected int speed() {
+    public int speed() {
         return 35;
     }
 
     @Override
-    protected List<Ability> genericAbilities() {
-        return Stream.concat(Stream.of(new MaskOfTheWild()), super.genericAbilities().stream()).toList();
+    public Set<Ability> genericAbilities() {
+        return Stream.concat(Stream.of(new MaskOfTheWild()), super.genericAbilities().stream()).collect(Collectors.toSet());
     }
 
     @Override
-    protected List<Weapon> weaponProficiencies() {
-        return List.of(Weapon.LONGSWORD, Weapon.SHORTSWORD, Weapon.SHORTBOW, Weapon.LONGBOW);
+    public Set<Weapon> weaponProficiencies() {
+        return Set.of(Weapon.LONGSWORD, Weapon.SHORTSWORD, Weapon.SHORTBOW, Weapon.LONGBOW);
     }
 }

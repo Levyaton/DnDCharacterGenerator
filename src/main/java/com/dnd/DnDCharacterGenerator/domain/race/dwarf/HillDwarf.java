@@ -5,7 +5,7 @@ import com.dnd.DnDCharacterGenerator.domain.race.dwarf.Dwarf;
 
 public class HillDwarf extends Dwarf {
     @Override
-    protected Stat strength() {
+    public Stat strength() {
         return new Stat.Strength(2);
     }
 }

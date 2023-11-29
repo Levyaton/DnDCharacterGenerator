@@ -1,9 +1,21 @@
 package com.dnd.DnDCharacterGenerator.domain.spells;
 
 
-import com.dnd.DnDCharacterGenerator.domain.Stat;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Embedded;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record Spell(String name, String desc, String page, String range,
-                    String components, String ritual, String duration,
-                    String concentration, String castingTime, String level, String higherLevel,
-                    String school, String clazz, String oaths, String material, String patrons, Integer id,String circles, String domains, String archetype) {}
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Embeddable
+public class Spell {
+    String name, page, range, components, ritual, duration, concentration, castingTime, level, higherLevel, school, clazz, oaths, material, patrons, circles, domains, archetype;
+    Integer id;
+    @Column(columnDefinition = "TEXT")
+    String desc;
+}

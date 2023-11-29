@@ -7,7 +7,9 @@ import com.dnd.DnDCharacterGenerator.domain.abillity.Ability;
 import com.dnd.DnDCharacterGenerator.domain.Stat;
 import com.dnd.DnDCharacterGenerator.domain.abillity.AttackAbility;
 import com.dnd.DnDCharacterGenerator.domain.race.AbstractRace;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
+@JsonTypeName("dragonborn")
 public class Dragonborn extends AbstractRace {
     private final Color color;
 
@@ -16,15 +18,19 @@ public class Dragonborn extends AbstractRace {
     }
 
     @Override
-    protected Stat strength() {
+    public Stat strength() {
         return new Stat.Strength(2);
     }
 
     @Override
-    protected Stat charisma() {
+    public Stat charisma() {
         return new Stat.Charisma(1);
     }
 
+    @Override
+    public String otherTraits() {
+        return color.name() + " Dragonborn";
+    }
     public enum Color{
         BLACK,
         BLUE,

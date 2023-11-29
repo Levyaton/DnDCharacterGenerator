@@ -5,12 +5,12 @@ import com.dnd.DnDCharacterGenerator.domain.DamageType;
 import com.dnd.DnDCharacterGenerator.domain.StatName;
 
 public class AttackAbility extends Ability{
-    String distance;
-    StatName savingThrow;
-    DamageType damageType;
-    DiceType damageDice;
-    DiceType difficultyDice;
-    StatName throwModifier;
+    protected String distance;
+    protected StatName savingThrow;
+    protected DamageType damageType;
+    protected DiceType damageDice;
+    protected DiceType difficultyDice;
+    protected StatName throwModifier;
     boolean addProficiencyBonus;
 
     public String getAccuracyInfo(){

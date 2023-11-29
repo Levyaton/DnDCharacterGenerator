@@ -3,37 +3,40 @@ package com.dnd.DnDCharacterGenerator.domain.race.elf;
 import com.dnd.DnDCharacterGenerator.domain.*;
 import com.dnd.DnDCharacterGenerator.domain.spells.Spell;
 import com.dnd.DnDCharacterGenerator.domain.spells.wizard.WizardSpellCantrip;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@JsonTypeName("highElf")
 public class HighElf extends Elf{
 
     private WizardSpellCantrip cantrip;
     private Language extraLanguage;
-    public HighElf(WizardSpellCantrip cantrip, Language language) {
+    public HighElf(WizardSpellCantrip cantrip, Language extraLanguage) {
         this.cantrip = cantrip;
-        this.extraLanguage = language;
+        this.extraLanguage = extraLanguage;
     }
 
     @Override
-    protected Stat intelligence() {
+    public Stat intelligence() {
         return new Stat.Intelligence(1);
     }
 
     @Override
-    protected List<Language> languages() {
-        return Stream.concat(Stream.of(extraLanguage), super.languages().stream()).toList();
+    public Set<Language> languages() {
+        return Stream.concat(Stream.of(extraLanguage), super.languages().stream()).collect(Collectors.toSet());
     }
 
     @Override
-    protected List<Spell> cantrips() {
-        return List.of(spellbook.getSpellById(cantrip.getId()));
+    public Set<Spell> cantrips() {
+        return Set.of(spellbook.getSpellById(cantrip.getId()));
     }
 
     @Override
-    protected List<Weapon> weaponProficiencies() {
-        return List.of(Weapon.LONGSWORD, Weapon.SHORTSWORD, Weapon.SHORTBOW, Weapon.LONGBOW);
+    public Set<Weapon> weaponProficiencies() {
+        return Set.of(Weapon.LONGSWORD, Weapon.SHORTSWORD, Weapon.SHORTBOW, Weapon.LONGBOW);
     }
 }

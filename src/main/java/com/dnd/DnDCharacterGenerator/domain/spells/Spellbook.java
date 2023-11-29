@@ -33,7 +33,7 @@ public class Spellbook {
 
     public Spell getSpellById(Integer spellId) {
         var optional = allSpells.stream()
-                .filter(spell -> spell.id().equals(spellId))
+                .filter(spell -> spell.getId().equals(spellId))
                 .findFirst();
         if (optional.isPresent()) {
             return optional.get();
@@ -44,20 +44,20 @@ public class Spellbook {
 
     public List<Spell> getSpellsByClass(String clazz) {
         return allSpells.stream()
-                .filter(spell -> spell.clazz() != null && spell.clazz().contains(clazz))
+                .filter(spell -> spell.getClazz() != null && spell.getClazz().contains(clazz))
                 .collect(Collectors.toList());
     }
 
     public List<Spell> getSpellsByLevel(String level) {
         return allSpells.stream()
-                .filter(spell -> spell.level() != null && spell.level().equalsIgnoreCase(level))
+                .filter(spell -> spell.getLevel() != null && spell.getLevel().equalsIgnoreCase(level))
                 .collect(Collectors.toList());
     }
 
     public List<Spell> getSpellsByClassAndLevel(String clazz, String level) {
         return allSpells.stream()
-                .filter(spell -> spell.clazz() != null && spell.clazz().contains(clazz)
-                        && spell.level() != null && spell.level().equalsIgnoreCase(level))
+                .filter(spell -> spell.getClazz() != null && spell.getClazz().contains(clazz)
+                        && spell.getLevel() != null && spell.getLevel().equalsIgnoreCase(level))
                 .collect(Collectors.toList());
     }
 }
